@@ -11,7 +11,7 @@ RoadRunner services
 Installation
 ```` 
 // install PHP dependencies
-composer install
+composer create-project k-samuel/rr-service
 
 // Road Runner instalaltion
 ./vendor/bin/rr get
