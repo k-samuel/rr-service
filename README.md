@@ -53,6 +53,5 @@ php ./vendor/bin/phpcs --standard=PSR12 ./src
 
 PHP CS Fixer
 ```
-composer require friendsofphp/php-cs-fixer
 php ./vendor/bin/php-cs-fixer fix src
 ```
