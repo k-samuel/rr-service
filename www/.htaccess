@@ -1,0 +1,9 @@
+AddDefaultCharset UTF-8
+RewriteEngine on
+
+Options -Indexes
+Options +FollowSymLinks
+DirectoryIndex index.php
+
+RewriteRule !(^static/.*)$ index.php [NC,L]
+

@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @author Kirill Yegorov 2021
+ */
+
+declare(strict_types=1);
+
+namespace KSamuel\RrService\Service\Loader;
+
+use KSamuel\RrService\Service\ServiceInterface;
+
+interface LoaderInterface
+{
+    /**
+     * @param array<string,mixed> $serviceConfig
+     * @return ServiceInterface
+     */
+    public function loadService(array $serviceConfig): ServiceInterface;
+}

@@ -1,0 +1,43 @@
+rpc:
+  listen: tcp://127.0.0.1:6001
+
+server:
+  command: "php worker.php"
+  relay: pipes
+
+logs:
+  # Logging mode can be "development" or "production". Do not forget to change this value for production environment.
+  mode: production
+
+http:
+  address: "0.0.0.0:8083"
+  pool:
+    num_workers: 6
+    max_jobs: 5000
+    allocate_timeout: 60s
+    destroy_timeout: 60s
+    supervisor:
+      # How often to check the state of the workers.
+      #
+      # Default: 1s
+      watch_tick: 1s
+
+      # Maximum time worker is allowed to live (soft limit). Zero means no limit.
+      # 7200 = 2h
+      # Default: 0s
+      ttl: 7200s
+
+      # How long worker can spend in IDLE mode after first using (soft limit). Zero means no limit.
+      #
+      # Default: 0s
+      idle_ttl: 360s
+
+      # Maximal worker memory usage in megabytes (soft limit). Zero means no limit.
+      #
+      # Default: 0
+      max_worker_memory: 128
+
+      # Maximal job lifetime (hard limit). Zero means no limit.
+      #
+      # Default: 0s
+      exec_ttl: 5s
