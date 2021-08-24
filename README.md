@@ -2,6 +2,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/k-samuel/rr-service.svg?style=flat-square)](https://packagist.org/packages/k-samuel/rr-service)
 ![Build and Test](https://github.com/k-samuel/rr-service/workflows/Build%20and%20Test/badge.svg?branch=main&event=push)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c92b0ab94f6f4fc8ae233372e9f4d351)](https://www.codacy.com/gh/k-samuel/rr-service/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=k-samuel/rr-service&amp;utm_campaign=Badge_Grade)
+
 RoadRunner services 
 ====
 
