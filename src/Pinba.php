@@ -7,7 +7,7 @@ namespace KSamuel\RrService;
 class Pinba
 {
     /**
-     * @var array | resource[] associative of pinba timers
+     * @var array | resource[] associative of Pinba timers
      */
     private static array $timers;
 

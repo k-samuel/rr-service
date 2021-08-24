@@ -72,10 +72,10 @@ class Application
         $this->config = $this->diContainer->get('server.config');
         // connections manager
         $this->connectionManager = $this->diContainer->get(Manager::class);
-        // лог ошибок
+        // error logger
         $this->logger = $this->diContainer->get(LoggerInterface::class);
 
-        // доступные сервисы
+        // available services
         if ($this->diContainer->get('application.mode') === self::MODE_WEB) {
             $this->services = $this->loadServices();
         }
@@ -179,7 +179,7 @@ class Application
                     'detail' => $error
                 ];
             } else {
-                // записываем в ответ ошибки если они есть
+                // write errors in response if any
                 $respData = ['message' => $error];
             }
         } else {

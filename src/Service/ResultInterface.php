@@ -6,7 +6,7 @@ namespace KSamuel\RrService\Service;
 
 /**
  * Interface ResultInterface
- * Интерфейс системной информации о результатах запуска сервиса
+ * Service results
  * @package App\Service
  */
 interface ResultInterface
@@ -16,47 +16,49 @@ interface ResultInterface
     public const RESULT_NO_DATA = 2;
 
     /**
-     * Получить статус результата (константа RESULT_*)
+     * Get result status (constant RESULT_*)
      * @return int
      */
     public function getStatus(): int;
 
     /**
-     * Получить текст ошибки
+     * Get error message
      * @return string|null
      */
     public function getError(): ?string;
 
     /**
-     * Задать сообщение об ошибке
+     * Set error message
      * @param string $message
      */
     public function setError(string $message): void;
 
     /**
+     * Get debug statistics
      * @return array<string,mixed>
      */
     public function getDebugStat(): array;
 
     /**
-     * Данные которые возвращает сервис
+     * Get service result data
      * @return array<int|string,mixed>
      */
     public function getData(): array;
 
     /**
-     * Установить данные результата обработки запроса
+     * Set result data
      * @param array<mixed,mixed> $data
      */
     public function setData(array $data): void;
 
     /**
+     * Get http error cod
      * @return int|null
      */
     public function getHttpErrorCode(): ?int;
 
     /**
-     * Задать код ответа при ошибке
+     * Set http error code
      * @param int $code
      */
     public function setHttpErrorCode(int $code): void;

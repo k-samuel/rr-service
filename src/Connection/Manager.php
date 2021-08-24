@@ -213,7 +213,7 @@ class Manager
     }
 
     /**
-     * Сбросить данные профилирования
+     * Reset debug profiles
      */
     public function resetProfiles(): void
     {
@@ -229,7 +229,7 @@ class Manager
     }
 
     /**
-     * Узнать включена ли отладка sql запросов
+     * Check if debug profiling is enabled
      * @return bool
      */
     public function isDebugEnabled(): bool

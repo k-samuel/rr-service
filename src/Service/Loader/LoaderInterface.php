@@ -10,6 +10,9 @@ namespace KSamuel\RrService\Service\Loader;
 
 use KSamuel\RrService\Service\ServiceInterface;
 
+/**
+ * Service loader interface
+ */
 interface LoaderInterface
 {
     /**

@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use RuntimeException;
 
 /**
- * Контейнер рантайм зависимостей для сервисов
+ * Runtime dependency container
  * @package App\Service
  */
 class DependencyContainer implements ContainerInterface
@@ -29,7 +29,7 @@ class DependencyContainer implements ContainerInterface
     }
 
     /**
-     * Проверить возможно ли разрешить зависимости
+     * Check if dependency can be resolved
      * @param array<int,string> $interfaceNames
      * @return bool
      */
@@ -44,7 +44,7 @@ class DependencyContainer implements ContainerInterface
     }
 
     /**
-     * Получить список зависимостей которые невозможно разрешить
+     * Get list of unresolved dependencies
      * @param array<int,string> $interfaceNames
      * @return array<int,string>
      */

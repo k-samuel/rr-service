@@ -7,23 +7,22 @@ namespace KSamuel\RrService\Config;
 class Storage
 {
     /**
-     * Инициализированные объекты настроек
+     * Initialized configurations
      * @var Config[]<string,Config>
      */
     private array $configs = [];
     /**
-     * Путь к папке с общими настройками
+     * Common configs path
      * @var string
      */
     private string $commonDir;
     /**
-     * Путь к папке с настройками в рамках текущего окружения
+     * Current environment configs path
      * @var string
      */
     private string $configDir;
 
     /**
-     * Инициализировать пути к файлам
      * @param string $commonDir
      * @param string $currentDir
      */
@@ -34,7 +33,7 @@ class Storage
     }
 
     /**
-     * Получить путь к папке с настройками текущего окружения
+     * Get path to current environment config dir
      * @return string
      */
     public function getConfigDir(): string
@@ -43,9 +42,9 @@ class Storage
     }
 
     /**
-     * Получить файл конфигурации
+     * Get configuration
      * @param string $path
-     * @param bool $fullPath - указан полный путь к конфигу, не мержить
+     * @param bool $fullPath - full path to config file, do not use config merge
      * @return Config
      * @throws \Exception
      */
@@ -55,13 +54,13 @@ class Storage
             $configData = [];
             $exist = false;
 
-            // Конфиги полный путь
+            // configs, full path
             if ($fullPath) {
                 if (file_exists($path)) {
                     $configData = require $path;
                     $exist = true;
                 }
-                // конфиги относительный путь с мержем
+                // configs, relative path with merge option
             } else {
                 if (file_exists($this->commonDir . $path)) {
                     $configData = require $this->commonDir . $path;

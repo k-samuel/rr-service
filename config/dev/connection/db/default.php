@@ -11,4 +11,4 @@ return [
         'adapterNamespace' => '',
         'port' => 3306,
     ]
-]; //search_statistics
+];

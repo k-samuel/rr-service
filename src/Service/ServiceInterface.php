@@ -11,8 +11,6 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Interface ServiceInterface
- * Интерфейс описывающий поведение сервисов поиска (стадий)
- * @package App\Service
  * @author Kirill Yegorov 2021
  */
 interface ServiceInterface
@@ -26,14 +24,14 @@ interface ServiceInterface
     public function __construct(Connection\Manager $connectionManager, LoggerInterface $logger, Storage $configStorage);
 
     /**
-     * Инициализация сервиса, прогрев
+     * Warm up service cache, load static dictionaries
      */
     public function warmup(): void;
 
     /**
-     * Запуск обработки
-     * @param ServerRequestInterface $req - запрос
-     * @param ResultInterface $res - контейнер результатов
+     * Request handler
+     * @param ServerRequestInterface $req
+     * @param ResultInterface $res
      */
     public function run(ServerRequestInterface $req, ResultInterface $res): void;
 }

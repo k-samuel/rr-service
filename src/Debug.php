@@ -35,11 +35,11 @@ class Debug
     public function getInfo(): array
     {
         $result = [];
-        // Получаем данные профилирования бд
+        // Retrieving database profiling data
         if ($this->config['sql']) {
             $result['sql'] = $this->sqlInfo();
         }
-        // Данные профилирования обращений к кэшу
+        // Cache Access Profiling Data
         if ($this->config['cache']) {
             $result['cache'] = $this->cacheInfo();
         }

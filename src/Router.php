@@ -10,7 +10,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Class Router
- * Обертка над запросом
  * @package App
  */
 class Router implements RouterInterface
@@ -35,7 +34,7 @@ class Router implements RouterInterface
     }
 
     /**
-     * Определение и запуск сценария, исходя из запрошенного урла
+     * Defining and launching a scenario based on the requested URL
      * @param ServerRequestInterface $request
      * @param LoaderInterface $loader
      * @param ResultInterface $result

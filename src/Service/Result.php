@@ -18,7 +18,7 @@ class Result implements ResultInterface
      */
     private array $data = [];
     /**
-     * HTTP Код ошибки
+     * HTTP error code
      * @var int|null
      */
     private ?int $httpErrorCode = null;
