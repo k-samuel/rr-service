@@ -2,9 +2,9 @@ name: Build and Test
 
 on:
   push:
-    branches: [ master, develop]
+    branches: [ main, develop]
   pull_request:
-    branches: [ master, develop]
+    branches: [ main, develop]
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Code Style check PHPCS
-      run: php ./vendor/bin/phpcs --standard=PSR12 ./src
+      run: php ./vendor/bin/phpcs --standard=PSR12 ./src ./services
 
     - name: PHPStan tests
       run: php -d memory_limit=256M ./vendor/bin/phpstan analyse src services tests

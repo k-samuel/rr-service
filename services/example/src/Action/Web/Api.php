@@ -9,7 +9,6 @@ use KSamuel\RrService\Service\ResultInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-
 /**
  * Example action for web API
  */

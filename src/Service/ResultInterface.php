@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KSamuel\RrService\Service;
 
-
 /**
  * Interface ResultInterface
  * Интерфейс системной информации о результатах запуска сервиса

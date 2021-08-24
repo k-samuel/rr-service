@@ -90,8 +90,7 @@ class Rabbit implements ConnectionInterface
         string $routingKey,
         string $body,
         string $contentType = 'text/plain' /* application/json */
-    ): bool
-    {
+    ): bool {
         if (!isset($this->connection)) {
             $this->connect();
         }
