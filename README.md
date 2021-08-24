@@ -6,6 +6,8 @@
 RoadRunner services 
 ====
 
+Basic core for running high-performance services with PHP RoadRunner
+
 [Docs](docs/index.md)
 
 Installation
