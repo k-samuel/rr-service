@@ -15,7 +15,7 @@ Installation
 // install PHP dependencies
 composer create-project k-samuel/rr-service
 
-// Road Runner instalaltion
+// Get RoadRunner binary
 ./vendor/bin/rr get
 
 // start Road Runner (default) 127.0.0.1:8083 DEV
