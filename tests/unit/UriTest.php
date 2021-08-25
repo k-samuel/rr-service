@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 class UriTest extends TestCase
 {
-    public function testGetPart()
+    public function testGetPart() : void
     {
         $url = '/my/url/path';
         $uri = new Uri();
