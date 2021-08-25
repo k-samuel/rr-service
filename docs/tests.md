@@ -2,17 +2,18 @@
 
 PHPStan
 ```
-./vendor/bin/phpstan analyse src services tests
+php ./vendor/bin/phpstan analyse src services tests
 ```
 
 PHPUnit
 ```
-./vendor/bin/phpunit
+php ./vendor/bin/phpunit
 ```
 
 PHP CS
 ```
-php ./vendor/bin/phpcs --standard=PSR12 ./src
+php ./vendor/bin/phpcs --standard=PSR12 ./src ./services ./tests/unit
+php ./vendor/bin/phpcs --standard=Squiz --sniffs=Squiz.NamingConventions.ValidVariableName ./src ./services ./tests/unit
 ```
 
 PHP CS Fixer

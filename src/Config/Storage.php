@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace KSamuel\RrService\Config;
 
+use InvalidArgumentException;
+
 class Storage
 {
     /**
@@ -46,7 +48,7 @@ class Storage
      * @param string $path
      * @param bool $fullPath - full path to config file, do not use config merge
      * @return Config
-     * @throws \Exception
+     * @throws InvalidArgumentException
      */
     public function get(string $path, bool $fullPath = false): Config
     {
@@ -82,7 +84,7 @@ class Storage
             }
 
             if (!$exist) {
-                throw new \Exception('Undefined config ' . $path);
+                throw new InvalidArgumentException('Undefined config ' . $path);
             }
 
             $config = new Config($path);

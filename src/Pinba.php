@@ -56,12 +56,12 @@ class Pinba
 
     /**
      * @param string $scriptName
-     * @param int $flag
+     * @param int|null $flag
      */
     public static function flush(string $scriptName = '', ?int $flag = null): void
     {
         if (self::$enabled && function_exists('pinba_flush')) {
-            if (is_null($flag)) {
+            if ($flag === null) {
                 $flag = PINBA_FLUSH_RESET_DATA;
             }
             pinba_flush($scriptName, $flag);
