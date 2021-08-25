@@ -36,7 +36,10 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Code Style check PHPCS
-      run: php ./vendor/bin/phpcs --standard=PSR12 ./src ./services
+      run: php ./vendor/bin/phpcs --standard=PSR12 ./src ./services ./tests
+
+    - name: Code Style check PHPCS additional sniffs
+      run: php ./vendor/bin/phpcs --standard=Squiz --sniffs=Squiz.NamingConventions.ValidVariableName ./src ./services ./tests
 
     - name: PHPStan tests
       run: php -d memory_limit=256M ./vendor/bin/phpstan analyse src services tests
