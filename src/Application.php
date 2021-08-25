@@ -36,11 +36,6 @@ class Application
     protected LoggerInterface $logger;
 
     /**
-     * Performance statistics
-     * @var array<string,mixed>
-     */
-    protected array $stat = [];
-    /**
      * @var Manager
      */
     protected Manager $connectionManager;
@@ -208,7 +203,6 @@ class Application
         $response->getBody()->write((string)json_encode($respData));
 
         // flush statistics
-        $this->stat = [];
         if ($this->config->get('debug')) {
             $this->resetDebug();
             $opts = $this->config->get('debug_options');
