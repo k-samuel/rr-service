@@ -29,37 +29,6 @@ class DependencyContainer implements ContainerInterface
     }
 
     /**
-     * Check if dependency can be resolved
-     * @param array<int,string> $interfaceNames
-     * @return bool
-     */
-    public function check(array $interfaceNames): bool
-    {
-        foreach ($interfaceNames as $name) {
-            if (!isset($this->container[$name])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Get list of unresolved dependencies
-     * @param array<int,string> $interfaceNames
-     * @return array<int,string>
-     */
-    public function getUnresolved(array $interfaceNames): array
-    {
-        $unresolved = [];
-        foreach ($interfaceNames as $name) {
-            if (!isset($this->container[$name])) {
-                $unresolved[] = $name;
-            }
-        }
-        return $unresolved;
-    }
-
-    /**
      * @param string $id
      * @return mixed
      */

@@ -40,12 +40,12 @@ composer dump-autoload -o
 
 PHPStan
 ```
-./vendor/bin/phpstan analyse src services tests
+php ./vendor/bin/phpstan analyse src services tests
 ```
 
 PHPUnit
 ```
-./vendor/bin/phpunit
+php ./vendor/bin/phpunit
 ```
 
 PHP CS
@@ -56,7 +56,7 @@ php ./vendor/bin/phpcs --standard=Squiz --sniffs=Squiz.NamingConventions.ValidVa
 
 PHP CS Fixer
 ```
-php ./vendor/bin/php-cs-fixer fix ./src ./services ./tests/unit
+php ./vendor/bin/php-cs-fixer fix ./src
 ```
 
 Example requests

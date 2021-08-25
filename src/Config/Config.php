@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KSamuel\RrService\Config;
 
-use Exception;
+use InvalidArgumentException;
 
 class Config
 {
@@ -33,12 +33,12 @@ class Config
     /**
      * @param string $key
      * @return mixed
-     * @throws Exception
+     * @throws InvalidArgumentException
      */
     public function get(string $key)
     {
         if (!isset($this->data[$key])) {
-            throw new Exception('Undefined config key ' . $this->name . '::' . $key);
+            throw new InvalidArgumentException('Undefined config key ' . $this->name . '::' . $key);
         }
         return $this->data[$key];
     }
