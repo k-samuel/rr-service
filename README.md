@@ -3,7 +3,7 @@
 ![Build and Test](https://github.com/k-samuel/rr-service/workflows/Build%20and%20Test/badge.svg?branch=main&event=push)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c92b0ab94f6f4fc8ae233372e9f4d351)](https://www.codacy.com/gh/k-samuel/rr-service/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=k-samuel/rr-service&amp;utm_campaign=Badge_Grade)
 
-RoadRunner services 
+RoadRunner services (Beta Version)
 ====
 
 Basic core for running high-performance services with PHP RoadRunner
@@ -57,4 +57,11 @@ php ./vendor/bin/phpcs --standard=Squiz --sniffs=Squiz.NamingConventions.ValidVa
 PHP CS Fixer
 ```
 php ./vendor/bin/php-cs-fixer fix ./src
+```
+
+Example requests
+
+http://127.0.0.1:8083/example/api
+```
+php console.php /example/cli-worker
 ```

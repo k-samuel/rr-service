@@ -3,15 +3,13 @@
 return [
     // uri path part with service code (other parts routes in service)
     'uri_path_start_index' => 1,
-    'routes' => [
-        //============ WEB API =======
-        'api' => [
-            'class' => \App\Example\Action\Web\Api::class
+    'services' => [
+        'index' => [
+            'class' => \App\Example\Action\Index::class
         ],
-        //============== CLI =========
-        'cli-worker' => [
-            'class' => \App\Example\Action\Cli\Worker::class
+        'api' => [
+            'class' => \App\Example\Action\Api::class
         ],
     ],
-    'default_route' => 'api'
+    'default_route' => 'index'
 ];
