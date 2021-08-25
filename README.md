@@ -63,5 +63,5 @@ Example requests
 
 http://127.0.0.1:8083/example/api
 ```
-php console.php /example/cli-worker
+php console.php /worker
 ```
