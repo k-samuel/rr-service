@@ -2,12 +2,12 @@
 
 PHPStan
 ```
-./vendor/bin/phpstan analyse src services tests
+php ./vendor/bin/phpstan analyse src services tests
 ```
 
 PHPUnit
 ```
-./vendor/bin/phpunit
+php ./vendor/bin/phpunit
 ```
 
 PHP CS

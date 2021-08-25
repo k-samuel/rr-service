@@ -22,6 +22,7 @@
     },
     "require": {
         "php":">=7.4.0",
+        "ext-json": "*",
         "spiral/roadrunner": "^2.0",
         "laminas/laminas-db": "^2.10",
         "nyholm/psr7": "^1.4",
