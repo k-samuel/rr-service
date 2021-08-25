@@ -7,7 +7,7 @@ return [
         'worker' => [
             'class' => \App\ExampleCli\Action\Worker::class
         ],
-        'index' =>[
+        'index' => [
             'class' => \App\ExampleCli\Action\Index::class
         ]
     ],
