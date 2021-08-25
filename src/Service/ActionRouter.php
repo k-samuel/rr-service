@@ -27,7 +27,7 @@ class ActionRouter
     public function getAction(ServerRequestInterface $req): ActionInterface
     {
         $routeStartIndex = $this->config->get('uri_path_start_index');
-        $routes = $this->config->get('routes');
+        $routes = $this->config->get('services');
 
         $uri = $req->getUri()->getPath();
         $parts = explode('/', trim($uri, '/'));

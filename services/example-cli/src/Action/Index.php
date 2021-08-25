@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Example\Action\Cli;
+namespace App\ExampleCli\Action;
 
 use KSamuel\RrService\Service\ActionInterface;
 use KSamuel\RrService\Service\ResultInterface;
@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Example console worker
  */
-class Worker implements ActionInterface
+class Index implements ActionInterface
 {
     /**
      * @param ServerRequestInterface $req
@@ -22,11 +22,6 @@ class Worker implements ActionInterface
      */
     public function run(ServerRequestInterface $req, ResultInterface $res, ContainerInterface $container): void
     {
-        $result = [];
-        for ($i = 0; $i < 10; $i++) {
-            $result[] = $i;
-            sleep(1);
-        }
-        $res->setData($result);
+        $res->setData(['message' => 'Please select console action']);
     }
 }

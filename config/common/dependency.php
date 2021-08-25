@@ -34,9 +34,9 @@ return [
          */
         $storage = $c->get(KSamuel\RrService\Config\Storage::class);
         if ($c->get('application.mode') === KSamuel\RrService\Application::MODE_CLI) {
-            return $storage->get('services_cli.php')->__toArray();
+            return $storage->get('cli/services.php')->__toArray();
         } else {
-            return $storage->get('services_web.php')->__toArray();
+            return $storage->get('web/services.php')->__toArray();
         }
     },
 

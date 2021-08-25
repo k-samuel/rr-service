@@ -38,7 +38,8 @@
     "autoload": {
       "psr-4": {
         "KSamuel\\RrService\\": "src/",
-        "App\\Example\\": "services/example/src"
+        "App\\Example\\": "services/example/src",
+        "App\\ExampleCli\\": "services/example-cli/src"
       }
     },
     "require-dev": {

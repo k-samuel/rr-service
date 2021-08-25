@@ -8,8 +8,8 @@ Routing within services is optional.
 
 Service routing is configured in 2 configuration files:
 
-* [config/common/web_routes.php](config/common/web_routes.php)  -  WEB JSON API
-* [config/common/cli_routes.php](config/common/cli_routes.php)  -  CLI tasks
+* [config/common/web/services.php](../config/common/web/services.php)  -  WEB JSON API
+* [config/common/cli/services.php](../config/common/cli/services.php)  -  CLI tasks
 
 ## Service
 Configuration file example:
@@ -17,20 +17,15 @@ Configuration file example:
 ```php 
 <?php
 return [
-    // list of routes
-    'routes' => [
-        // Only specified uri path 
-        '/example/api/' => [
+    // uri path part with service code (other parts routes in service)
+    'uri_path_start_index' => 0,
+    'services' => [
+        // All requests starting with /example/
+        'example' => [
             'class' => \App\Example\ExampleService::class
         ],
-        // All uri paths starting with  /my-service/complex-actions/ 
-        // using KSamuel\RrService\Service\ActionRouter for internal routing 
-        '/my-service/complex-actions/*' => [
-            'class' => \Service\MyComplexService\Service::class
-        ],
     ],
-    // роут по умолчанию
-    'default_route' => '/example/api/'
+    'default_service' => 'example'
 ];
 ```
 
@@ -49,27 +44,26 @@ In routing, you need to specify only the uri path part, excluding the uri of the
 Example:
 
 ```
-specific action route: /my-api-name/service-name/my-action
+specific action route: /example/api
 ```
 
-In the Action routing settings, specify only `my-action`
+In the Action routing settings, specify only `api`
 
 Settings example: services/example/config/routes.php
 ```php
 <?php
 return [
+    // uri path part with service code /example/[1]/ 
     'uri_path_start_index' => 1,
-    'routes' => [
-        //============ WEB API =======
+    'services' => [
         'api' => [
             'class' => \App\Example\Action\Web\Api::class
         ],
-        //============== CLI =========
-        'cli-worker' => [
-            'class' => \App\Example\Action\Cli\Worker::class
+        'index' => [
+            'class' => \App\Example\Action\Web\Index::class
         ],
     ],
-    'default_route' => 'api'
+    'default_route' => 'index'
 ];
 ```
 An example of starting routing within a service :
@@ -78,14 +72,10 @@ An example of starting routing within a service :
 public function run(ServerRequestInterface $req, ResultInterface $resp): void
 {
         /**
-         * @var App\Service\ActionRouter $actionRouter
+         * @var ActionRouter $actionRouter
          */
-        $actionRouter = $this->di->get(App\Service\ActionRouter::class);
-        
-        $action = $actionRouter->getAction($req, 3); 
-        // where 3 - is the ordinal number of the url part with which it starts
-        // internal routing of my-action from uri: /my-servise-base/my-service/my-action 
-               
-        $action->run($req, $resp, $this->di);
+        $actionRouter = $this->di->get(ActionRouter::class);
+        $action = $actionRouter->getAction($req);
+        $action->run($req, $res, $this->di);
 }
 ```
