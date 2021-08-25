@@ -59,7 +59,7 @@ PHP CS Fixer
 php ./vendor/bin/php-cs-fixer fix ./src
 ```
 
-Example requests
+### Example requests
 
 http://127.0.0.1:8083/example/api
 ```
