@@ -7,7 +7,8 @@ namespace KSamuel\RrService;
 class Uri
 {
     /**
-     * @param int $index
+     * @param string $uri
+     * @param int $index  - indexes from 0
      * @param string|null $default
      * @return string|null
      */

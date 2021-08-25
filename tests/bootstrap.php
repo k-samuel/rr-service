@@ -1,6 +1,6 @@
 <?php
 
-define('ROOT_PATH', dirname(__FILE__, 3) . '/');
+define('ROOT_PATH', dirname(__FILE__, 2) . '/');
 $config = require ROOT_PATH . 'config/common.php';
 $config['config_path'] = ROOT_PATH . 'config/test/';
 
