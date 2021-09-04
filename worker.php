@@ -56,12 +56,14 @@ while ($req = $worker->waitRequest()) {
     Pinba::flush('worker.php wait');
     Pinba::setServer($config['pinba_server']);
     try {
-        $response = $psrFactory->createResponse(200)->withAddedHeader('Content-Type', 'application/json; charset=utf-8');
+        $response = $psrFactory->createResponse(200)->withAddedHeader(
+            'Content-Type',
+            'application/json; charset=utf-8'
+        );
         $resp = $server->run($req, $response);
         $worker->respond($resp);
     } catch (\Throwable $e) {
-        $worker->getWorker()->error('Something Went Wrong');
-        error_log((string)$e->getMessage(), 0);
+        $worker->getWorker()->error($e->getMessage() . ' ' . $e->getTraceAsString());
     }
 
     //move metrics to actual server
@@ -69,7 +71,7 @@ while ($req = $worker->waitRequest()) {
     Pinba::setServer('unknown');
 
     // reset Runtime Cache
-    if($runtimeResetTime + $config['runtime_cache_lifetime'] < time()){
+    if ($runtimeResetTime + $config['runtime_cache_lifetime'] < time()) {
         $result = $server->resetRuntimeCache();
         $server->warmUp();
         $runtimeResetTime = time();
