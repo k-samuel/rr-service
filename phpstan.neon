@@ -6,6 +6,4 @@ parameters:
 	polluteCatchScopeWithTryAssignments: true
 	level: max
 	ignoreErrors:
-	    - '#Function pinba_[a-zA-Z0-9\\_]#'
-	    - '#Constant PINBA_FLUSH_RESET_DATA not found.#'
 	    - '#\$options of class MongoDB\\Driver\\BulkWrite constructor expects bool#'

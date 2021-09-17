@@ -31,15 +31,15 @@ logs:
 http:
   address: "0.0.0.0:8083"
   pool:
-    num_workers: 10
+    num_workers: 6
     max_jobs: 0
-    allocate_timeout: 60s
+    allocate_timeout: 5s
     destroy_timeout: 10s
     supervisor:
       # How often to check the state of the workers.
       #
       # Default: 1s
-      watch_tick: 1s
+      watch_tick: 3s
 
       # Maximum time worker is allowed to live (soft limit). Zero means no limit.
       # 7200 = 2h

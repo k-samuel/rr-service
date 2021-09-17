@@ -2,7 +2,7 @@ Application manifest
 ===
 An application is a set of independent services that are launched by a server.
 
-The project is optimized for running on RoadRunner, in development mode it can be launched under apache / nginx
+The project is optimized for running with RoadRunner, in development mode it can be launched under apache / nginx
 
 At startup, all the code is initialized even before requests are received, the caches are warmed up
 
