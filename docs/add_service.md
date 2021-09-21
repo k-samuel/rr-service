@@ -4,12 +4,23 @@ Creat directory `services/example`
 
 Service files structure:
 
-        config/                       // settings
-            dependency.php            // DependencyConteiner configuration
-            routes.php                // routing settings
+        config/                       
+
+            cli/                      // CLI settings
+                dependency.php        // DependencyConteiner configuration
+                routes.php            // routing settings
+
+            web/                      // WEB settings
+                dependency.php        // DependencyConteiner configuration
+                routes.php            // routing settings
+
         src/                          // code
-            Action                    // Actions directory (if needed)
-            ExampleService.php      // Service class 
+            Action/                   // Actions directory (if needed)
+                Cli/                  // Comand line actions
+                Web/                  // http api actions
+
+            ExampleService.php        // Service class 
+
         docs/                         // documentation
         readme.md                     // documentation index file
 
@@ -31,7 +42,7 @@ For example: adding RuntimeCache for dictionaries and other static application d
 ### DI Container
 Every service using own DependencyContainer. [ExampleService](../services/example/src/ExampleService.php)
 
-Specialized service configurations should be registered as service dependencies. [Example dependencies](../services/example/config/dependency.php)
+Specialized service configurations should be registered as service dependencies. [Example dependencies](../services/example/config/web/dependency.php)
 
 
 ### Service routing
@@ -39,6 +50,6 @@ Use ```KSamuel\RrService\Service\ActionRouter``` to specify service routes
 
 [ExampleService](../services/example/src/ExampleService.php)
 
-[Example routes](../services/example/config/routes.php)
+[Example routes](../services/example/config/web/routes.php)
 
-Action Router should be added into [Example dependencies](../services/example/config/dependency.php)
+Action Router should be added into [Example dependencies](../services/example/config/web/dependency.php)

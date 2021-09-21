@@ -31,18 +31,20 @@ class LoaderContainer implements LoaderInterface
     }
 
     /**
-     * @param array<string,mixed> $serviceConfig
+     * @param array{class:string,dependency:string} $serviceConfig
      * @return ServiceInterface
      */
     public function loadService(array $serviceConfig): ServiceInterface
     {
-        if (!isset($this->services[$serviceConfig['class']])) {
-            $this->services[$serviceConfig['class']] = new $serviceConfig['class'](
+        $key = $serviceConfig['class'] . '::' . $serviceConfig['dependency'];
+        if (!isset($this->services[$key])) {
+            $this->services[$key] = new $serviceConfig['class'](
                 $this->connections,
                 $this->log,
-                $this->configStore
+                $this->configStore,
+                $serviceConfig
             );
         }
-        return $this->services[$serviceConfig['class']];
+        return $this->services[$key];
     }
 }

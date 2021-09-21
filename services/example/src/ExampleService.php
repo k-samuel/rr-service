@@ -21,13 +21,19 @@ class ExampleService implements ServiceInterface
     public function __construct(
         Connection\Manager $connectionManager,
         LoggerInterface $logger,
-        Config\Storage $configStorage
+        Config\Storage $configStorage,
+        array $serviceConfig
     ) {
         $container = new DependencyContainer();
         $container->bind(LoggerInterface::class, $logger);
         $container->bind(Connection\Manager::class, $connectionManager);
         $container->bind(Config\Storage::class, $configStorage);
-        $container->bindPhpConfig(dirname(__DIR__) . '/config/dependency.php');
+
+        if (!isset($serviceConfig['dependency'])) {
+            throw new \InvalidArgumentException('Undefined service dependency config');
+        }
+
+        $container->bindPhpConfig(dirname(__DIR__) . '/' . $serviceConfig['dependency']);
 
         $this->di = $container;
     }

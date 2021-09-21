@@ -5,7 +5,9 @@ return [
     'services' => [
         // all requests starting with /example (http:://my.host/example/api)
         'example' => [
-            'class' => \App\Example\ExampleService::class
+            'class' => \App\Example\ExampleService::class,
+            // path to service dependency config related to service directory
+            'dependency' => 'config/web/dependency.php'
         ],
     ],
     'default_service' => 'example'

@@ -5,10 +5,10 @@ return [
     'uri_path_start_index' => 1,
     'services' => [
         'index' => [
-            'class' => \App\Example\Action\Index::class
+            'class' => \App\Example\Action\Web\Index::class
         ],
         'api' => [
-            'class' => \App\Example\Action\Api::class
+            'class' => \App\Example\Action\Web\Api::class
         ],
     ],
     'default_route' => 'index'
