@@ -22,7 +22,9 @@ return [
     'services' => [
         // All requests starting with /example/
         'example' => [
-            'class' => \App\Example\ExampleService::class
+            'class' => \App\Example\ExampleService::class,
+            // path to service dependency config related to service directory
+            'dependency' => 'config/web/dependency.php'
         ],
     ],
     'default_service' => 'example'
@@ -49,7 +51,7 @@ specific action route: /example/api
 
 In the Action routing settings, specify only `api`
 
-Settings example: services/example/config/routes.php
+Settings example: services/example/config/web/routes.php
 ```php
 <?php
 return [

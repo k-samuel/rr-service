@@ -16,7 +16,7 @@ use KSamuel\RrService\Service\ServiceInterface;
 interface LoaderInterface
 {
     /**
-     * @param array<string,mixed> $serviceConfig
+     * @param array{class:string,dependency:string} $serviceConfig
      * @return ServiceInterface
      */
     public function loadService(array $serviceConfig): ServiceInterface;

@@ -27,11 +27,11 @@ class Loader implements LoaderInterface
     }
 
     /**
-     * @param array<string,mixed> $serviceConfig
+     * @param array{class:string,routes:string} $serviceConfig
      * @return ServiceInterface
      */
     public function loadService(array $serviceConfig): ServiceInterface
     {
-        return new $serviceConfig['class']($this->connections, $this->log, $this->configStore);
+        return new $serviceConfig['class']($this->connections, $this->log, $this->configStore, $serviceConfig);
     }
 }

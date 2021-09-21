@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Example\Action;
+namespace App\Example\Action\Cli;
 
 use KSamuel\RrService\Service\ActionInterface;
 use KSamuel\RrService\Service\ResultInterface;
@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Example action for web API
  */
-class Api implements ActionInterface
+class Index implements ActionInterface
 {
     /**
      * @param ServerRequestInterface $req
@@ -25,11 +25,7 @@ class Api implements ActionInterface
         $res->setData(
             [
                 'success' => true,
-                'message' => 'Example action',
-                'data' => [
-                    'field1' => random_int(0, 100),
-                    'field2' => random_int(100, 1000)
-                ]
+                'message' => 'Please select worker action',
             ]
         );
     }

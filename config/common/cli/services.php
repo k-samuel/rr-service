@@ -4,9 +4,11 @@ return [
     'uri_path_start_index' => 0,
     'services' => [
         // all requests starting with /example (php console.php /worker)
-        'worker' => [
-            'class' => \App\ExampleCli\ExampleService::class
+        'cli' => [
+            'class' => \App\Example\ExampleService::class,
+            // path to service dependency config related to service directory
+            'dependency' => 'config/cli/dependency.php'
         ],
     ],
-    'default_service' => 'worker'
+    'default_service' => 'cli'
 ];

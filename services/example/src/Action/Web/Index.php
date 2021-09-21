@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ExampleCli\Action;
+namespace App\Example\Action\Web;
 
 use KSamuel\RrService\Service\ActionInterface;
 use KSamuel\RrService\Service\ResultInterface;
@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Example console worker
+ * Example action for web API
  */
 class Index implements ActionInterface
 {
@@ -22,6 +22,11 @@ class Index implements ActionInterface
      */
     public function run(ServerRequestInterface $req, ResultInterface $res, ContainerInterface $container): void
     {
-        $res->setData(['message' => 'Please select console action']);
+        $res->setData(
+            [
+                'success' => true,
+                'message' => 'Index action',
+            ]
+        );
     }
 }
