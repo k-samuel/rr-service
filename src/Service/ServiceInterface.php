@@ -22,7 +22,12 @@ interface ServiceInterface
      * @param Storage $configStorage
      * @param array{class:string,dependency:string} $serviceConfig
      */
-    public function __construct(Connection\Manager $connectionManager, LoggerInterface $logger, Storage $configStorage, array $serviceConfig);
+    public function __construct(
+        Connection\Manager $connectionManager,
+        LoggerInterface $logger,
+        Storage $configStorage,
+        array $serviceConfig
+    );
 
     /**
      * Warm up service cache, load static dictionaries

@@ -27,7 +27,7 @@ class Loader implements LoaderInterface
     }
 
     /**
-     * @param array{class:string,routes:string} $serviceConfig
+     * @param array{class:string,dependency:string} $serviceConfig
      * @return ServiceInterface
      */
     public function loadService(array $serviceConfig): ServiceInterface

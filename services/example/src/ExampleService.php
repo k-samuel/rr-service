@@ -29,7 +29,7 @@ class ExampleService implements ServiceInterface
         $container->bind(Connection\Manager::class, $connectionManager);
         $container->bind(Config\Storage::class, $configStorage);
 
-        if(!isset($serviceConfig['dependency'])){
+        if (!isset($serviceConfig['dependency'])) {
             throw new \InvalidArgumentException('Undefined service dependency config');
         }
 
