@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace KSamuel\RrService;
+namespace KSamuel\RrService\Router;
 
+use KSamuel\RrService\Router\Exception\UndefinedRouteException;
 use KSamuel\RrService\Service\Loader\LoaderInterface;
-use KSamuel\RrService\Service\ResultInterface;
+use KSamuel\RrService\Uri;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -24,6 +26,7 @@ class Router implements RouterInterface
 
     /**
      * Router constructor.
+     *
      * @param array <string,mixed>  $config
      * @param Uri $uri
      */
@@ -35,17 +38,17 @@ class Router implements RouterInterface
 
     /**
      * Defining and launching a scenario based on the requested URL
+     *
      * @param ServerRequestInterface $request
-     * @param LoaderInterface $loader
-     * @param ResultInterface $result
-     * @return ResultInterface
-     * @throws \Exception
+     * @param LoaderInterface        $loader
+     *
+     * @return ResponseInterface
+     * @throws UndefinedRouteException
      */
     public function route(
         ServerRequestInterface $request,
-        LoaderInterface $loader,
-        ResultInterface $result
-    ): ResultInterface {
+        LoaderInterface $loader
+    ): ResponseInterface {
         $defaultRoute = $this->config['default_service'] ?? null;
         $serviceCode = $this->uri->getPart($request->getUri()->getPath(), $this->config['uri_path_start_index']);
 
@@ -55,14 +58,11 @@ class Router implements RouterInterface
             $route = $services[$serviceCode];
         } else {
             if ($defaultRoute === null || !isset($services[$defaultRoute])) {
-                throw new \RuntimeException('Undefined default route ' . $defaultRoute);
-            } else {
-                $route = $services[$defaultRoute];
+                throw new UndefinedRouteException($defaultRoute);
             }
+            $route = $services[$defaultRoute];
         }
 
-        $service = $loader->loadService($route);
-        $service->run($request, $result);
-        return $result;
+        return $loader->loadService($route)->run($request);
     }
 }

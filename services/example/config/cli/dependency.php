@@ -13,5 +13,7 @@ return [
         return new \KSamuel\RrService\Service\ActionRouter(
             $c->get('routes')
         );
-    }
+    },
+    // PSR-7 response factory
+    \KSamuel\RrService\Http\ResponseFactory::class => \KSamuel\RrService\Http\ResponseFactory::class
 ];

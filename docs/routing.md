@@ -71,13 +71,13 @@ return [
 An example of starting routing within a service :
 ```php 
 // service start
-public function run(ServerRequestInterface $req, ResultInterface $resp): void
+public function run(ServerRequestInterface $req): ResponseInterface
 {
         /**
          * @var ActionRouter $actionRouter
          */
         $actionRouter = $this->di->get(ActionRouter::class);
         $action = $actionRouter->getAction($req);
-        $action->run($req, $res, $this->di);
+        return $action->run($req, $this->di);
 }
 ```

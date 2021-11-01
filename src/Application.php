@@ -7,14 +7,16 @@ namespace KSamuel\RrService;
 use KSamuel\RrService\Config\Config;
 use KSamuel\RrService\Config\Storage;
 use KSamuel\RrService\Connection\Manager;
+use KSamuel\RrService\Router\RouterInterface;
 use KSamuel\RrService\Service\DependencyContainer;
 use KSamuel\RrService\Service\Loader\LoaderInterface;
-use KSamuel\RrService\Service\Result;
 use KSamuel\RrService\Service\ServiceInterface;
+use Nyholm\Psr7\Stream;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
+use JsonException;
 
 /**
  * Application server
@@ -127,13 +129,24 @@ class Application
     }
 
     /**
+     * @param float $appStart
      * @return array<array>
      * @throws \Exception
      */
-    protected function getDebugData(): array
+    protected function getDebugData(float $appStart): array
     {
         $debug = new \KSamuel\RrService\Debug($this->connectionManager, $this->config->get('debug_options'));
-        return $debug->getInfo();
+        $info = $debug->getInfo();
+        if (isset($info['sql']['query'])) {
+            foreach ($info['sql']['query'] as & $item) {
+                $item['q'] = (string)$item['q'];
+            }
+            unset($item);
+        }
+        $info['time'] = (float)number_format(microtime(true) - $appStart, 5);
+        $info['mem_peak'] = number_format(memory_get_peak_usage() / 1024 / 1024, 3) . ' Mb';
+        $info['mem_usage'] = number_format(memory_get_usage() / 1024 / 1024, 3) . ' Mb';
+        return $info;
     }
 
     /**
@@ -148,59 +161,34 @@ class Application
     /**
      * Handle Request
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @return ResponseInterface $response
      * @throws \Exception
      */
-    public function run(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function run(ServerRequestInterface $request): ResponseInterface
     {
         $time = microtime(true);
         /**
          * @var RouterInterface $router
          */
         $router = $this->diContainer->get(RouterInterface::class);
-        $result = $router->route($request, $this->diContainer->get(LoaderInterface::class), new Result());
+        $response = $router->route($request, $this->diContainer->get(LoaderInterface::class));
 
-        $error = $result->getError();
-        if (!empty($error)) {
-            $httpCode = $result->getHttpErrorCode();
-            if ($httpCode !== null) {
-                $code = $httpCode;
-                $response = $response->withStatus($code);
-                $respData = [
-                    'success' => false,
-                    'msg' => $response->getReasonPhrase(),
-                    'status' => $response->getStatusCode(),
-                    'detail' => $error
-                ];
-            } else {
-                // write errors in response if any
-                $respData = ['message' => $error];
+        // Add debug info for success json response
+        if ($this->config->get('debug') && $response->getStatusCode() === 200) {
+            try {
+                $data = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+            } catch (JsonException $e) {
+                $data = null;
             }
-        } else {
-            $respData = $result->getData();
-        }
-
-        if ($this->config->get('debug')) {
-            $debugInfo = $this->getDebugData();
-            if (isset($debugInfo['sql']['query'])) {
-                foreach ($debugInfo['sql']['query'] as & $item) {
-                    $item['q'] = (string)$item['q'];
-                }
-                unset($item);
+            if (is_array($data)) {
+                $data['debug'] = $this->getDebugData($time);
+                $response = $response->withBody(Stream::create((string)json_encode($data)));
             }
-            $debugInfo['stat'] = $result->getDebugStat();
-            $debugInfo['time'] = (float)number_format(microtime(true) - $time, 5);
-            $debugInfo['mem_peak'] = number_format(memory_get_peak_usage() / 1024 / 1024, 3) . ' Mb';
-            $debugInfo['mem_usage'] = number_format(memory_get_usage() / 1024 / 1024, 3) . ' Mb';
-            $respData['debug'] = $debugInfo;
         }
 
         // disable browser caching
         $response->withAddedHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
         $response->withAddedHeader('Pragma', 'no-cache');
-        // create response
-        $response->getBody()->write((string)json_encode($respData));
 
         // flush statistics
         if ($this->config->get('debug')) {

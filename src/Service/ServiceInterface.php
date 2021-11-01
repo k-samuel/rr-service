@@ -6,6 +6,7 @@ namespace KSamuel\RrService\Service;
 
 use KSamuel\RrService\Config\Storage;
 use KSamuel\RrService\Connection;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
@@ -37,7 +38,7 @@ interface ServiceInterface
     /**
      * Request handler
      * @param ServerRequestInterface $req
-     * @param ResultInterface $res
+     * @return ResponseInterface
      */
-    public function run(ServerRequestInterface $req, ResultInterface $res): void;
+    public function run(ServerRequestInterface $req): ResponseInterface;
 }

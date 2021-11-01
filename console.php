@@ -18,18 +18,17 @@ $psrFactory = new Psr7\Factory\Psr17Factory();
 $server = new Application($config);
 
 $request = $psrFactory->createServerRequest('GET', $_SERVER['argv'][1]);
-$response = $psrFactory->createResponse(200)->withAddedHeader('Content-Type', 'application/json; charset=utf-8');
 
 try {
-    $resp = $server->run($request, $response);
+    $resp = $server->run($request);
 } catch (\Throwable $e) {
     echo $e->getMessage() . PHP_EOL;
     exit(1);
 }
 
-echo $response->getBody();
+echo $resp->getBody();
 
-if ($response->getStatusCode() === 200) {
+if ($resp->getStatusCode() === 200) {
     exit(0);
 } else {
     exit(1);

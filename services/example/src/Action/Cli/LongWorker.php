@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Example\Action\Cli;
 
+use KSamuel\RrService\Http\ResponseFactory;
 use KSamuel\RrService\Service\ActionInterface;
 use KSamuel\RrService\Service\ResultInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -14,19 +16,22 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class LongWorker implements ActionInterface
 {
-    /**
-     * @param ServerRequestInterface $req
-     * @param ResultInterface $res
-     * @param ContainerInterface $container
-     * @throws \Exception
-     */
-    public function run(ServerRequestInterface $req, ResultInterface $res, ContainerInterface $container): void
+    public function run(ServerRequestInterface $req, ContainerInterface $container): ResponseInterface
     {
         $result = [];
         for ($i = 0; $i < 10; $i++) {
             $result[] = $i;
             sleep(1);
         }
-        $res->setData($result);
+
+        /**
+         * @var ResponseFactory $responseFactory
+         */
+        $responseFactory = $container->get(ResponseFactory::class);
+        $data = [
+            'success' => true,
+            'result' => $result
+        ];
+        return $responseFactory->jsonResponse($data);
     }
 }

@@ -92,7 +92,7 @@ return [
     KSamuel\RrService\Uri::class => KSamuel\RrService\Uri::class,
 
     // Base mapping and routing for requests
-    KSamuel\RrService\RouterInterface::class => static function (c $c) {
-        return new KSamuel\RrService\Router($c->get('router.config'), $c->get(KSamuel\RrService\Uri::class));
+    KSamuel\RrService\Router\RouterInterface::class => static function (c $c) {
+        return new KSamuel\RrService\Router\Router($c->get('router.config'), $c->get(KSamuel\RrService\Uri::class));
     },
 ];

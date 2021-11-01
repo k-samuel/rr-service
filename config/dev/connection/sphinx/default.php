@@ -1,6 +1,6 @@
 <?php
 return [
-    'adapter' => 'App\\Connection\\Sphinx',
+    'adapter' => \KSamuel\RrService\Connection\Sphinx::class,
     'options' => [
         'host' => '',
         'port' =>  9306,

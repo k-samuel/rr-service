@@ -6,11 +6,13 @@ namespace App\Example;
 
 use KSamuel\RrService\Config;
 use KSamuel\RrService\Connection;
+use KSamuel\RrService\Http\ResponseFactory;
 use KSamuel\RrService\Service\ActionRouter;
 use KSamuel\RrService\Service\DependencyContainer;
 use KSamuel\RrService\Service\ResultInterface;
 use KSamuel\RrService\Service\ServiceInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Log\LoggerInterface;
 
@@ -43,13 +45,13 @@ class ExampleService implements ServiceInterface
         // worm up cache
     }
 
-    public function run(ServerRequestInterface $req, ResultInterface $res): void
+    public function run(ServerRequestInterface $req): ResponseInterface
     {
         /**
          * @var ActionRouter $actionRouter
          */
         $actionRouter = $this->di->get(ActionRouter::class);
         $action = $actionRouter->getAction($req);
-        $action->run($req, $res, $this->di);
+        return $action->run($req, $this->di);
     }
 }

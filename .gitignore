@@ -2,3 +2,4 @@
 /.idea/
 composer.lock
 /rr
+/data/phpunit_report/

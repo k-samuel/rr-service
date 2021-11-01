@@ -34,11 +34,7 @@ $config['runtime_cache_lifetime'] += random_int(1, 5 * 60);
 
 while ($req = $worker->waitRequest()) {
     try {
-        $response = $psrFactory->createResponse(200)->withAddedHeader(
-            'Content-Type',
-            'application/json; charset=utf-8'
-        );
-        $resp = $server->run($req, $response);
+        $resp = $server->run($req);
         $worker->respond($resp);
     } catch (\Throwable $e) {
         $worker->getWorker()->error($e->getMessage() . ' ' . $e->getTraceAsString());
